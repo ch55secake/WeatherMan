@@ -26,7 +26,7 @@ windSpeed = (dailyData[1]["windSpeed"])
 
 url = ('https://newsapi.org/v2/top-headlines?'
        'sources=bbc-news&'
-       'apiKey=ae05c4e7fd9145bf9b0a941fd4832443')
+       'apiKey=')
 response = requests.get(url)
 newsMoments = response.json()
 storyOne = (newsMoments["articles"][0]["url"])

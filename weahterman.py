@@ -6,12 +6,12 @@ from discord.utils import get
 import time
 import requests
 
-url = "https://dark-sky.p.rapidapi.com/51.291750,0.311296"
+url = "https://dark-sky.p.rapidapi.com/"
 
 querystring = {"units": "auto", "lang": "en"}
 
 headers = {
-    "X-RapidAPI-Key": "6d48558338msh973a547daf7f4c8p1c460fjsn34222e738ef3",
+    "X-RapidAPI-Key": "",
     "X-RapidAPI-Host": "dark-sky.p.rapidapi.com"
 }
 
@@ -66,4 +66,4 @@ async def displayedembed(ctx):
     embed.set_footer(text="Data provided by the BBC.")
     await ctx.send(embed=embed)
 
-bot.run("MTAwNTg4MzQyOTAxMjkwNjA0NQ.GpXRXY.ZgeJA4zCmTZ-6hd5IeRyFL-Qs8Bgxb1l8kwRjQ")
+bot.run("")

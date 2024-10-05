@@ -1,3 +1,5 @@
+import json
+
 from discord.ext import commands
 from client.newsapi_client import NewsApiClient
 from client.darksky_api_client import DarkSkyClient
@@ -9,11 +11,11 @@ stories_to_urls = news_api_client.get_list_of_story_urls(news_api_response=news_
 news_api_discord_message = news_api_client.create_embedded_discord_message(stories=stories_to_urls)
 
 # Fetch all necessary information from darksky client and populate an embedded message
-darksky_client = DarkSkyClient("")
-darksky_response = darksky_client.make_dark_sky_request()
+darksky_client: DarkSkyClient = DarkSkyClient("")
+darksky_response: json = darksky_client.make_dark_sky_request()
 darksky_api_discord_message = darksky_client.create_embedded_discord_message(darksky_api_response=darksky_response)
 
-bot = commands.Bot(command_prefix="*", help_command=None)
+bot: commands.Bot = commands.Bot(command_prefix="*", help_command=None)
 
 
 @bot.event

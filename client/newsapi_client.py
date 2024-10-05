@@ -20,7 +20,7 @@ class NewsApiClient(object):
         Reaches out to news api with provided api key
         :return: news api response as json.
         """
-        news_api_url = f"https://newsapi.org/v2/top-headlines?sources-bbc-news&apiKey={self.api_key}"
+        news_api_url: str = f"https://newsapi.org/v2/top-headlines?sources-bbc-news&apiKey={self.api_key}"
         try:
             return req.get(url=news_api_url).json()
         except req.exceptions.Timeout:
@@ -29,27 +29,27 @@ class NewsApiClient(object):
             raise NewsApiRequestException(e.request)
 
     @staticmethod
-    def get_list_of_story_urls(news_api_response: json, number_of_stories: int):
+    def get_list_of_story_urls(news_api_response: json, number_of_stories: int) -> dict[str, str]:
         """
         Parses News API response in order to provide dict of URLs for later bot response
         :param news_api_response: json object from the news api
         :param number_of_stories: the number of story urls to fetch
         :return: dictionary of urls sorted by the publishing time
         """
-        stories = {}
+        stories: dict[str, str] = {}
         for x in range(0, number_of_stories):
             stories.update({news_api_response["articles"][x]["publishedAt"], news_api_response["articles"][x]["url"]})
 
-        return sorted(stories.keys())
+        return stories
 
     @staticmethod
-    def create_embedded_discord_message(stories: dict):
+    def create_embedded_discord_message(stories: dict) -> d.Embed:
         """
         Create embedded discord message with response from the news api
         :param stories: stories returned by the news api
         :return: discord embedded message populated with information from the news api
         """
-        embed = d.Embed(title="🌎 News 🌎", color=0xff00ea)
+        embed: d.Embed = d.Embed(title="🌎 News 🌎", color=0xff00ea)
         for published_at, story_url in stories.items():
             embed.add_field(name="Breaking:", value=story_url, inline=False)
             embed.add_field(name="Published at:", value=published_at, inline=False)
